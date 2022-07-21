@@ -12,7 +12,7 @@ REFERENCE2: https://www.adamsmith.haus/python/answers/how-to-create-pandas-dataf
 
 DATA SOURCE: https://www.spu.ac.th/directory/school/
 
-All the credits go to Sripatum University for the origin of data
+All the credits go to Sripatum University for the origin of data.
 """
 import requests
 from bs4 import BeautifulSoup
@@ -68,47 +68,49 @@ def URLCorrection(urllist):
         urllist[elem] = urllist[elem][0:ErrorChkIndexDict[elem]]
     for elem in correction:
         urllist.append(elem)
+    for i in range(len(urllist)):
+        if urllist[i][-1] != "/":
+            urllist[i] = urllist[i] + "/"
+    for i in range(len(urllist)):
+        if urllist[i][-2] == "?":
+            urllist[i] = urllist[i].replace("?/", "/")
+    urllist.pop(43859)
     return urllist
-    
-#PHASE 1 ---- URL Extraction ----
-"""
-urlfull = []
-ContainerAll = []
-for i in range(0, 5):
-    urlroot = "https://www.spu.ac.th/directory/school/province/78/?id=78&do=province&page=" + str(i+1)
-    urlfull.append(urlroot)
-    
-for elem in urlfull:
-    ContainerAll.extend(URLGraber(elem))
-    
-with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "a+") as file:
-    file.write('\n'.join(ContainerAll))
 
-"""
+if __name__ == "__main__":
+    
+# #PHASE 1 ---- URL Extraction ----
+#     urlfull = []
+#     ContainerAll = []
+#     for i in range(0, 5):
+#         urlroot = "https://www.spu.ac.th/directory/school/province/78/?id=78&do=province&page=" + str(i+1)
+#         urlfull.append(urlroot)
+    
+#     for elem in urlfull:
+#         ContainerAll.extend(URLGraber(elem))
+    
+#     with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "a+") as file:
+#         file.write('\n'.join(ContainerAll))
+
 #PHASE 2 ---- Data Extraction and DataFrame Creation ----
 
-with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "r") as file:
-    sourcelist = file.readlines()
+    with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "r") as file:
+        sourcelist = file.readlines()
     
-DataURL = []
-for elem in sourcelist:
-    DataURL.append(elem[:-1])
-if len(sourcelist) == len(DataURL):
-    print("Complete!")
-else:
-    print("Length of data is not the same. There may be some inconsistency in the data between the end character deletion.")
-URLCorrection(DataURL)
+    DataURL = []
+    for elem in sourcelist:
+        DataURL.append(elem[:-1])
+    if len(sourcelist) == len(DataURL):
+        print("Complete!")
+    else:
+        print("Length of data is not the same. There may be some inconsistency in the data between the end character deletion.")
+    URLCorrection(DataURL)
 
-ContainerAll = []
-for elem in DataURL:
-    ContainerAll.append(ContentGraber(elem))
-    time.sleep(random.random())
+    ContainerAll = []
+    for elem in DataURL[34287:]:
+        ContainerAll.append(ContentGraber(elem))
+        time.sleep(random.random())
 
-#Create DataFrame from ContainerAll
-df = pd.DataFrame(data=ContainerAll, columns=["SCHOOLNAME", "AUTHORITY", "SCHOOLTYPE", "THCITY", "THDISTRICT", "THPROVINCE", "EMAIL", "WEBSITE"])
-
-#PHASE 3 ---- Data Clean-up (if necessary) :-P
-
-
-#PHASE FINAL
-#Export to .csv file for data import"""
+#Create DataFrame from ContainerAll and export the dataFrame to .csv file
+    df = pd.DataFrame(data=ContainerAll, columns=["SCHOOLNAME", "AUTHORITY", "SCHOOLTYPE", "THCITY", "THDISTRICT", "THPROVINCE", "EMAIL", "WEBSITE"])
+    df.to_csv("/home/tkz/Desktop/CodingProjects/ThaiDataBank/ThaiDataBank/SchoolsinThailand.csv", encoding="utf-8")
