@@ -40,15 +40,15 @@ def ContentGraber(source):
 
 def URLGraber(source):
     
-    # ---- SET PARAMETERS ----
+    # ---- SET LOCATOR PARAMETERS ----
     TableClassLocator = "table table-striped table-school-1" #>> for school url extraction from main site
 
-    # ---- Getting content of the website ---- #
+    # ---- Getting source URL from each link ---- #
     HTMLCode = requests.get(source).content
     HTMLinSoup = BeautifulSoup(HTMLCode)
     TableinSoup = HTMLinSoup.find('table', {'class': TableClassLocator})
     
-    #Data Extraction! Let's begin.
+    #URL Extraction
     container = []
     
     for elem in TableinSoup.find_all("tr"):                 #find what is in tr class
@@ -58,15 +58,15 @@ def URLGraber(source):
 
 def URLCorrection(urllist):
     ErrorChkIndexDict = {}
-    correction = []
+    Correction = []
     
     for i in range(len(urllist)):
         if urllist[i].find("/http") != -1:
             ErrorChkIndexDict[i] = (urllist[i].find("/http")) + 1
     for elem in ErrorChkIndexDict:
-        correction.append(urllist[elem][ErrorChkIndexDict[elem]:])
+        Correction.append(urllist[elem][ErrorChkIndexDict[elem]:])
         urllist[elem] = urllist[elem][0:ErrorChkIndexDict[elem]]
-    for elem in correction:
+    for elem in Correction:
         urllist.append(elem)
     for i in range(len(urllist)):
         if urllist[i][-1] != "/":
@@ -74,25 +74,25 @@ def URLCorrection(urllist):
     for i in range(len(urllist)):
         if urllist[i][-2] == "?":
             urllist[i] = urllist[i].replace("?/", "/")
-    urllist.pop(43859)
+    urllist.pop(43859) #Del to prevent error
     return urllist
 
 if __name__ == "__main__":
     
-# #PHASE 1 ---- URL Extraction ----
+# ---- PHASE 1 ---- URL Extraction ----
 #     urlfull = []
-#     ContainerAll = []
+#     ContainerURL = []
 #     for i in range(0, 5):
 #         urlroot = "https://www.spu.ac.th/directory/school/province/78/?id=78&do=province&page=" + str(i+1)
 #         urlfull.append(urlroot)
     
 #     for elem in urlfull:
-#         ContainerAll.extend(URLGraber(elem))
+#         ContainerURL.extend(URLGraber(elem))
     
 #     with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "a+") as file:
-#         file.write('\n'.join(ContainerAll))
+#         file.write('\n'.join(ContainerURL))
 
-#PHASE 2 ---- Data Extraction and DataFrame Creation ----
+# ---- PHASE 2 ---- Data Extraction ----
 
     with open("/home/tkz/Desktop/CodingProjects/Project1.txt", "r") as file:
         sourcelist = file.readlines()
@@ -107,10 +107,10 @@ if __name__ == "__main__":
     URLCorrection(DataURL)
 
     ContainerAll = []
-    for elem in DataURL[34287:]:
+    for elem in DataURL:
         ContainerAll.append(ContentGraber(elem))
         time.sleep(random.random())
 
-#Create DataFrame from ContainerAll and export the dataFrame to .csv file
+# ---- PHASE 3 ---- Create DataFrame from ContainerAll and export the dataFrame to .csv file ----
     df = pd.DataFrame(data=ContainerAll, columns=["SCHOOLNAME", "AUTHORITY", "SCHOOLTYPE", "THCITY", "THDISTRICT", "THPROVINCE", "EMAIL", "WEBSITE"])
     df.to_csv("/home/tkz/Desktop/CodingProjects/ThaiDataBank/ThaiDataBank/SchoolsinThailand.csv", encoding="utf-8")
