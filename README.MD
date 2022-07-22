@@ -13,7 +13,7 @@ TKZ
   - .csv can be imported to Excel by going to Data tab, selecting From Text/CSV under Get & Transform Data, and then locating the .csv file you've downloaded. 🕊️🕊️
   - Python Code for the whole extraction/data treatment/data transformation, as well as all of the raw data are placed in the SchoolsinThai folder. Visit the folder to find more cool staff relating to this project! 
   - All credits go to the source of raw data. I am just extracted them and recombined them in the way that I think is much easier for others to use.
-  - All schools and their details are subject to change. As of July 21, the school details are quite accurate.E-mails are masked to protect schools from unwanted attacks. Exercise some cautions before using the data.
+  - All schools and their details are subject to change. As of July 21, the school details are quite accurate. E-mails are masked to protect schools from unwanted attacks. Exercise some cautions before using the data.
   - Hope this'll make your life easier. 🙂🙂
 
 - Project 2 - TO BE DEFINED...
