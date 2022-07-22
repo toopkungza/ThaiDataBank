@@ -6,7 +6,7 @@ This repository is one of the good places where you can find data from various, 
 
 All credits go to the sources of raw data. Many thanks to Dr. Attapol Thamrongrattanarit-Rutherford (http://attapol.github.io) for my inspiration for coding.
 I hope you'll find something interesting from these data.
-Love, TKZ
+TKZ
 
 #UPDATE on July 21, 2022
 - Project 1 - Schools in Thailand (Status: Completed, for now.)
