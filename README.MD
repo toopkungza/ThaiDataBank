@@ -2,7 +2,7 @@
 This repository is one of the good places where you can find data from various, reliable Thai sources.
 - Automation scripts written in Python are created for data mining/extraction or for reaching the set goals.
 - Data will be cleaned as necessary and placed in array for ease of analysis. Usually .csv will be placed in the main branch.
-- This is an initial phrase of this non-profit project and there are so many things to do. Support is always welcomed, especially advices for coding. I'm just a script newbie. 😋
+- This is an initial phrase of this project and there are so many things to do. Support is always welcomed, especially advices for coding. I'm just a script newbie. 😋
 
 All credits go to the sources of raw data. Many thanks to Dr. Attapol Thamrongrattanarit-Rutherford (http://attapol.github.io) for my inspiration for coding.
 I hope you'll find something interesting from these data.
