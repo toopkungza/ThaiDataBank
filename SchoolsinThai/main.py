@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-#Infomation Scraper - Thai School Information
+#Information Scraper - Thai School Information
 #Code for scraping data from table
 
 Created on Sun Jul 17 22:00:14 2022
@@ -10,9 +10,7 @@ Created on Sun Jul 17 22:00:14 2022
 REFERENCE: https://stackoverflow.com/questions/38155206/scrape-a-table-class-in-python
 REFERENCE2: https://www.adamsmith.haus/python/answers/how-to-create-pandas-dataframe-from-a-numpy-array-in-python
 
-DATA SOURCE: https://www.spu.ac.th/directory/school/
-
-All the credits go to Sripatum University for the origin of data.
+RAW DATA SOURCE FOR PREPROCESSING: https://www.spu.ac.th/directory/school/
 """
 import requests
 from bs4 import BeautifulSoup
